@@ -93,7 +93,7 @@ algo_deduplication will require Python 3.5 or newer.
 You can check the latest sources with the command::
 
 ```bash
-    git clone git@<ip>:REPO/algo_deduplication.git
+    git clone git@github.com/habiboulaye/items_deduplication.git
 ```
 
 #### User installation (not required)
