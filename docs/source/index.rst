@@ -13,8 +13,11 @@ Feel free to contact me for any question: habiboulaye@gmail.com
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :numbered:
+   :titlesonly:
 
+   1_methodology/index
+   2_user_doc/index
 
 
 Indices and tables

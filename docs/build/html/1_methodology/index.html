@@ -1,0 +1,154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1. Deep Learning Methodology for Items Deduplication &#8212; deduplication 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. Using algo_deduplicate - Entry points" href="../2_user_doc/index.html" />
+    <link rel="prev" title="Welcome to deduplication’s documentation!" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="toctree-wrapper compound">
+</div>
+<div class="section" id="deep-learning-methodology-for-items-deduplication">
+<h1>1. Deep Learning Methodology for Items Deduplication<a class="headerlink" href="#deep-learning-methodology-for-items-deduplication" title="Permalink to this headline">¶</a></h1>
+<p>The items deduplication is an important challenge  in marketplace. It helps improving customer experience, avoiding fraud, …. However, the deduplication algorithms are facing to many challenges causing confusions and poor performance for practical usage (false alarms, non-detection).
+Main challenges are related to the image context variances (position, luminosity, environment, …)</p>
+<p>A rapid review of the state of the art tools and research papers shows the use of several approaches for items deduplication. We can highlight the hashing-based techniques that aims to create an image fingerprint and more modern deep neural networks techniques that extract deep features by creating an embedding space for context-free representation … Afterward, downstream of their representations, duplicated items are detected using a suitable similarity measure or a nearest neighbour method.</p>
+<p>In this short-term task, we propose an algorithm v0.1 for image deduplication (package algo_deduplicate) using deep learning models. Deep neural architectures have good capabilities to be robust to context variations and to capture hidden patterns and correlations.
+In summary, our algorithm is build in 3 main stages (cf. class Duplicate in iduplicate file):
+* Selection of a pre-trained deep learning model from large image dataset (eg. ResNet on imagenet). Skip the top layers (fc) to get a model for deep features extraction thanks to transfer leaning.</p>
+<blockquote>
+<div><ul class="simple">
+<li>We use this deep learning pre-trained model to instanciate the class Duplicate</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>Pre-processing and representation: This stage is use to build a good representation of the images in a suitable features space (a key success factor).</dt>
+<dd><ul class="first last">
+<li>Image preparation (cf. method Duplicate.prepare): this stage applies all the image transformations need to create a suitable input for deep features extraction in good conditions. resizing, normalisation, … An optional image augmentation (bluring, rotation, …) can help to increase the algorithm performance.</li>
+<li>Deep features extraction (cf. method Duplicate.represent): Get a good representation of the image in an embedding features space.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Duplication detection (cf. method Duplicate.duplication_check). This method takes two images and compares how much they are similar using a similarity scoring method (eg. cosim). A threshold is tuned to have a good balance between false alerts and true positive rates.</li>
+</ul>
+<div class="section" id="improvement-perspectives">
+<h2>1.1. Improvement perspectives:<a class="headerlink" href="#improvement-perspectives" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Study the capabilities and limitations of hashing techniques, and other methods like visual vocabulary and tfidf for visual features …</li>
+<li>Compare ResNet with some other deep learning pre-trained models (eg. VGG, AlexNet, …). Combine them with the method Locality Sensitive Hashing to detect duplication.</li>
+<li><dl class="first docutils">
+<dt>Regarding deep learning architectures, the autoencoders (and ) setting seems more suitable to learn good representation for deduplication purpose.</dt>
+<dd><ul class="first last">
+<li>In fact, autoencoders are designed to learn “identity-function-like” with free context whereas pre-trained networks are usually trained for classification purposes.</li>
+<li>However, transfer learning takes advantage of large databases, and is more easy/simple to use compare to the training of new deep learning models from scratch.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Depending to the availability of labelled data, the model could be improve with additional training with specialisation/personalisation (eg. locatisation, region, …)</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">deduplication</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Deep Learning Methodology for Items Deduplication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_user_doc/index.html">2. Using algo_deduplicate - Entry points</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">Welcome to deduplication’s documentation!</a></li>
+      <li>Next: <a href="../2_user_doc/index.html" title="next chapter">2. Using algo_deduplicate - Entry points</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Habiboulaye A.B.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/1_methodology/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

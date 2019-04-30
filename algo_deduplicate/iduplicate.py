@@ -1,4 +1,7 @@
 import numpy as np
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
 from keras.preprocessing import image
 from keras.applications.resnet50 import ResNet50, preprocess_input
 
@@ -50,7 +53,7 @@ class Duplicate(object):
         """
         return self.model_feature_extractor.predict(x_image)[0]
 
-    def cosinus_similarity_score(self, x1, x2):
+    def cosinus_similarity(self, x1, x2):
         """
         Similarity measure betwen 2 vectors (cosinus is used here)
                     # Next - Go beyond with: Locality Sensitive Hashing, T-SNE, ...
@@ -63,16 +66,14 @@ class Duplicate(object):
         cos_sim = np.dot(x1, x2) / (np.linalg.norm(x1) * np.linalg.norm(x2))
         return cos_sim
 
-    def duplication_check(self, img1_path, img2_path, sim_threshold=95):
+    def duplication_score(self, img1_path, img2_path):
         """
         Check if the 2 input images are the same
 
         :param img1_path: image of item 1
         :param img2_path: image of item 2
-        :param sim_threshold: similarity threshold to detect duplicate
-        :return: True or False
+        :return: score
         """
-
         # represent image 1
         x1 = self.prepare(img1_path)
         x1_features = self.represent(x1)
@@ -80,8 +81,4 @@ class Duplicate(object):
         x2 = self.prepare(img2_path)
         x2_features = self.represent(x2)
         # ===> compute cosim
-        sim_score = 100*self.cosinus_similarity_score(x1_features, x2_features)
-        if sim_score > sim_threshold:
-            print("===> Detect Duplicated items with score:{} >= {}".format(sim_score, sim_threshold))
-            return True
-        return False
+        return 100*self.cosinus_similarity(x1_features, x2_features)

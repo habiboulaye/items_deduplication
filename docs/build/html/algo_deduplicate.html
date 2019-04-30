@@ -44,8 +44,8 @@
 <em class="property">class </em><code class="descclassname">algo_deduplicate.iduplicate.</code><code class="descname">Duplicate</code><span class="sig-paren">(</span><em>model=&lt;keras.engine.training.Model object&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#algo_deduplicate.iduplicate.Duplicate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="method">
-<dt id="algo_deduplicate.iduplicate.Duplicate.cosinus_similarity_score">
-<code class="descname">cosinus_similarity_score</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="sig-paren">)</span><a class="headerlink" href="#algo_deduplicate.iduplicate.Duplicate.cosinus_similarity_score" title="Permalink to this definition">¶</a></dt>
+<dt id="algo_deduplicate.iduplicate.Duplicate.cosinus_similarity">
+<code class="descname">cosinus_similarity</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="sig-paren">)</span><a class="headerlink" href="#algo_deduplicate.iduplicate.Duplicate.cosinus_similarity" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Similarity measure betwen 2 vectors (cosinus is used here)</dt>
 <dd># Next - Go beyond with: Locality Sensitive Hashing, T-SNE, …</dd>
@@ -68,8 +68,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="algo_deduplicate.iduplicate.Duplicate.duplication_check">
-<code class="descname">duplication_check</code><span class="sig-paren">(</span><em>img1_path</em>, <em>img2_path</em>, <em>sim_threshold=95</em><span class="sig-paren">)</span><a class="headerlink" href="#algo_deduplicate.iduplicate.Duplicate.duplication_check" title="Permalink to this definition">¶</a></dt>
+<dt id="algo_deduplicate.iduplicate.Duplicate.duplication_score">
+<code class="descname">duplication_score</code><span class="sig-paren">(</span><em>img1_path</em>, <em>img2_path</em><span class="sig-paren">)</span><a class="headerlink" href="#algo_deduplicate.iduplicate.Duplicate.duplication_score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the 2 input images are the same</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -78,11 +78,10 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>img1_path</strong> – image of item 1</li>
 <li><strong>img2_path</strong> – image of item 2</li>
-<li><strong>sim_threshold</strong> – similarity threshold to detect duplicate</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True or False</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">score</p>
 </td>
 </tr>
 </tbody>
@@ -168,6 +167,10 @@
 
 
 <h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="1_methodology/index.html">1. Deep Learning Methodology for Items Deduplication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_user_doc/index.html">2. Using algo_deduplicate - Entry points</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
